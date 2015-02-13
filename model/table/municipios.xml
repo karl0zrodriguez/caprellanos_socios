@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : municipios.xml
+    Description:
+        Estructura de la tabla municipios
+-->
+<tabla>
+<columna>
+    <nombre>cod_municipio</nombre>
+    <tipo>int(15)</tipo>
+    <nulo>NO</nulo>
+</columna>
+<columna>
+    <nombre>codestado</nombre>
+    <tipo>int(15)</tipo>
+    <nulo>NO</nulo>
+</columna>
+<columna>
+    <nombre>municipio</nombre>
+    <tipo>varchar(16)</tipo>
+    <nulo>NO</nulo>
+</columna>
+<restriccion>
+    <nombre>m_cod</nombre>
+    <consulta>UNIQUE (cod_municipio,codestado)</consulta>
+</restriccion>
+<!--<restriccion>
+      <nombre>ca_municipios_estados</nombre>
+      <consulta>FOREIGN KEY (codestado)
+      REFERENCES estados (cod_estado)
+      ON DELETE CASCADE ON UPDATE CASCADE</consulta>
+</restriccion>-->
+</tabla>

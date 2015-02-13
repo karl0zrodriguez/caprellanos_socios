@@ -1,0 +1,224 @@
+{include="header"}
+
+<script type="text/javascript">
+   function show_nuevo_socio()
+   {
+      $("#modal_nuevo_socio").modal('show');
+      document.f_nuevo_socio.cedula.focus();
+   }
+   
+   /*
+   function show_grupos()
+   {
+      $("#ul_tabs li").each(function() {
+         $( this ).removeClass("active");
+      });
+      $("#div_clientes").hide();
+      $("#b_grupos_clientes").addClass('active');
+      $("#div_grupos").show();
+      document.f_new_grupo.nombre.focus();
+   }
+   */
+   $(document).ready(function() {
+      document.f_custom_search.query.focus();
+      
+      if(window.location.hash.substring(1) == 'nuevo')
+      {
+         show_nuevo_socio();
+      }
+      
+      /*
+      else if(window.location.hash.substring(1) == 'grupos')
+      {
+         show_grupos();
+      }
+      
+      $("#b_grupos_clientes").click(function(event) {
+         event.preventDefault();
+         show_grupos();
+      });
+      */
+      $("#b_nuevo_socio").click(function(event) {
+         event.preventDefault();
+         show_nuevo_socio();
+      });
+      $("#b_importar").click(function(event) {
+         event.preventDefault();
+         $("#modal_importar").modal('show');
+      });
+   });
+</script>
+<!--
+<link rel="stylesheet" href="plugins/caja_ahorros/extensions/bootstrap-table.css">
+<script src="plugins/caja_ahorros/extensions/bootstrap-table.js"></script>
+<!-- plugins export-->
+<!--<script src="plugins/caja_ahorros/extensions/table-export/bootstrap-table-export.js"></script>
+<script src="plugins/caja_ahorros/extensions/table-export/jquery.base64.js"></script>
+<script src="plugins/caja_ahorros/extensions/table-export/tableExport.js"></script>-->
+
+{if condition="$fsc->query!=''"}
+<h3 class="text-center">Resultados de la búsqueda "{$fsc->query}":</h3>
+{/if}
+
+<ul class="nav nav-tabs" id="ul_tabs">
+   <li class="active"><a href="{$fsc->url()}">Todos</a></li>
+   
+</ul>
+
+<div id="div_clientes">
+   <div class="table-responsive">
+      <!--<table 
+        data-classes="table table-hover table-bordered table-striped" 
+        data-toggle="table" 
+        data-show-columns="true" 
+        data-show-export="true" 
+        >-->
+      <table class="table table-hover">
+         <thead>
+            <tr>
+               <th class="text-left" data-sortable="true">Cedula</th>
+               <th class="text-left" data-sortable="true">Nombres y Apellidos</th>
+               <th class="text-left" data-sortable="true">Teléfonos</th>
+               <th class="text-left" data-sortable="true">Correo</th>
+            </tr>
+         </thead>
+         {loop="$fsc->resultados"}
+         <tr>
+            <td><a href="{$value->url()}">{$value->cedula}</a></td>
+            <td>{$value->nombre_1} {$value->nombre_2} {$value->apellido_1} {$value->apellido_2}</td>
+            <td>{$value->telefono_movil} - {$value->telefono}</td>
+            <td>{$value->email}</td>
+         </tr>
+         {else}
+         <tr class="bg-warning">
+            <td colspan="3">Ningún socio encontrado. Pulse el botón <b>Nuevo</b> para crear uno.</td>
+         </tr>
+         {/loop}
+      </table>
+   </div>
+   
+   <ul class="pager" id="ul_paginador">
+      {if condition="$fsc->anterior_url()!=''"}
+      <li class="previous">
+         <a href="{$fsc->anterior_url()}">
+            <span class="glyphicon glyphicon-chevron-left"></span> &nbsp; Anteriores
+         </a>
+      </li>
+      {/if}
+      
+      {if condition="$fsc->siguiente_url()!=''"}
+      <li class="next">
+         <a href="{$fsc->siguiente_url()}">
+            Siguientes &nbsp; <span class="glyphicon glyphicon-chevron-right"></span>
+         </a>
+      </li>
+      {/if}
+   </ul>
+</div>
+
+<form class="form-horizontal" role="form" name="f_nuevo_socio" action="{$fsc->url()}" method="post">
+   <div class="modal" id="modal_nuevo_socio">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               <h4 class="modal-title">Nuevo socio</h4>
+            </div>
+            <div class="modal-body">
+               <div class="form-group">
+                  <label for="nacionalidad" class="col-lg-2 col-md-2 col-sm-2 control-label">Nacionalidad</label>
+                  <div class="col-lg-10 col-md-10 col-sm-10">
+                     <select class="form-control" name="nacionalidad">
+                     {loop="$fsc->socio->valor_nacionalidad()"}
+                     <option value="{$value}">{$value}</option>
+                     {/loop}
+                     </select>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="cedula" class="col-lg-2 col-md-2 col-sm-2 control-label">Cedula</label>
+                  <div class="col-lg-10 col-md-10 col-sm-10">
+                     <input class="form-control" type="text" name="cedula" autocomplete="off"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="nombre_1" class="col-lg-2 col-md-2 col-sm-2 control-label">Primer Nombre</label>
+                  <div class="col-lg-10 col-md-10 col-sm-10">
+                     <input class="form-control" type="text" name="nombre_1" autocomplete="off"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="nombre_2" class="col-lg-2 col-md-2 col-sm-2 control-label">Segundo Nombre</label>
+                  <div class="col-lg-10 col-md-10 col-sm-10">
+                     <input class="form-control" type="text" name="nombre_2" autocomplete="off"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="apellido_1" class="col-lg-2 col-md-2 col-sm-2 control-label">Primer Apellido</label>
+                  <div class="col-lg-10 col-md-10 col-sm-10">
+                     <input class="form-control" type="text" name="apellido_1" autocomplete="off"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="apellido_2" class="col-lg-2 col-md-2 col-sm-2 control-label">Segundo Apellido</label>
+                  <div class="col-lg-10 col-md-10 col-sm-10">
+                     <input class="form-control" type="text" name="apellido_2" autocomplete="off"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="telefono_movil" class="col-lg-2 col-md-2 col-sm-2 control-label">Teléfono Móvil</label>
+                  <div class="col-lg-10 col-md-10 col-sm-10">
+                     <input class="form-control" type="text" name="telefono_movil" autocomplete="off"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="email" class="col-lg-2 col-md-2 col-sm-2 control-label">Correo</label>
+                  <div class="col-lg-10 col-md-10 col-sm-10">
+                     <input class="form-control" type="text" name="email" autocomplete="off"/>
+                  </div>
+               </div> 
+            </div>
+            <div class="modal-footer">
+               <button class="btn btn-sm btn-primary" type="submit" onclick="this.disabled=true;this.form.submit();">
+                  <span class="glyphicon glyphicon-floppy-disk"></span> &nbsp; Guardar
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+</form>
+
+
+<form enctype='multipart/form-data' action="{$fsc->url()}" method="post" class="form">
+   <!--<input type='hidden' name='fam' value='{$fsc->familia->codfamilia}'/>-->
+   <input type='hidden' name='archivo' value='TRUE'/>
+   <div class="modal fade" id="modal_importar">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               <h4 class="modal-title">Importar socios</h4>
+            </div>
+            <div class="modal-body">
+               <p>
+                  El archivo debe estar en formato CSV: valores separados por punto y coma y sin separador de texto,
+                  adem&aacute;s las columnas deben ir en este orden: nacionalidad, cedula, nombre_1, nombre_2, apellido_1, apellido_2, sexo, estado_civil, fecha_nac, telefono_movil, telefono.
+               </p>
+               <div class="form-group">
+                  Archivo:
+                  <input class="form-control" name='farchivo' type='file' autofocus/>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button class="btn btn-sm btn-primary" type="submit" onclick="this.disabled=true;this.form.submit();">
+                   <span class="glyphicon glyphicon-play"></span>
+                   &nbsp; Comenzar
+                </button>
+            </div>
+         </div>
+      </div>
+   </div>
+</form>
+
+
+{include="footer"}

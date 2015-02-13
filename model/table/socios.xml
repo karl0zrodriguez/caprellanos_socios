@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : socios.xml
+    Description:
+        Estructura de la tabla socioss.
+-->
+<tabla>
+   <columna>
+      <nombre>nacionalidad</nombre>
+      <tipo>character varying(1)</tipo>
+      <nulo>NO</nulo>
+   </columna>
+   <columna>
+      <nombre>cedula</nombre>
+      <tipo>character varying(20)</tipo>
+      <nulo>NO</nulo>
+   </columna>
+   <columna>
+      <nombre>nombre_1</nombre>
+      <tipo>character varying(100)</tipo>
+      <nulo>NO</nulo>
+   </columna>
+   <columna>
+      <nombre>nombre_2</nombre>
+      <tipo>character varying(100)</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>apellido_1</nombre>
+      <tipo>character varying(100)</tipo>
+      <nulo>NO</nulo>
+   </columna>
+   <columna>
+      <nombre>apellido_2</nombre>
+      <tipo>character varying(100)</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>sexo</nombre>
+      <tipo>character varying(10)</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>estado_civil</nombre>
+      <tipo>character varying(15)</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>fecha_nac</nombre>
+    <tipo>date</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>lugar_nac</nombre>
+      <tipo>text</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>cod_estado</nombre>
+      <tipo>character varying(6)</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>cod_municipio</nombre>
+      <tipo>character varying(6)</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>telefono_movil</nombre>
+      <tipo>character varying(30)</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>telefono</nombre>
+      <tipo>character varying(30)</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>email</nombre>
+      <tipo>character varying(50)</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>fecha_registro</nombre>
+      <tipo>date</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>fecha_baja</nombre>
+      <tipo>date</tipo>
+      <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>status</nombre>
+    <tipo>varchar(10)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>zona</nombre>
+    <tipo>varchar(25)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>personal</nombre>
+    <tipo>varchar(25)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>areapersonal</nombre>
+    <tipo>varchar(25)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>tiponomina</nombre>
+    <tipo>varchar(25)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>empresaingreso</nombre>
+    <tipo>varchar(25)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>cargo</nombre>
+    <tipo>varchar(50)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>codunidad</nombre>
+    <tipo>varchar(10)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>unidad</nombre>
+    <tipo>varchar(50)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>ubicacion</nombre>
+    <tipo>varchar(50)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+    <nombre>centro_trabajo</nombre>
+    <tipo>varchar(25)</tipo>
+    <nulo>YES</nulo>
+   </columna>
+   <columna>
+      <nombre>id</nombre>
+      <tipo>serial</tipo>
+      <nulo>NO</nulo>
+      <defecto>nextval('socios_id_seq'::regclass)</defecto>
+   </columna>
+   <restriccion>
+      <nombre>socios_pkey</nombre>
+      <consulta>PRIMARY KEY (id)</consulta>
+   </restriccion>
+   <restriccion>
+    <nombre>socios_ci</nombre>
+    <consulta>UNIQUE (cedula)</consulta>
+   </restriccion>
+</tabla>
